@@ -12,7 +12,7 @@
 <div class="custom-section" style="padding: {{ padding_top }} {{ padding_right }} {{ padding_bottom }} {{ padding_left }}; margin: {{ margin_top }} {{ margin_right }} {{ margin_bottom }} {{ margin_left }};">
   <div class="grid grid-cols-12 gap-4 items-stretch">
 
-    <!-- Left 6-column main image -->
+    <!-- 6-column main image -->
     <div class="col-span-12 md:col-span-6">
       {%- if section.settings.image != blank -%}
         <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt | default: 'Main Image' }}" class="w-full h-full object-cover rounded-lg">
@@ -21,8 +21,8 @@
       {%- endif -%}
     </div>
 
-    <!-- Right 6-column background image with overlay text -->
-    <div class="col-span-12 md:col-span-6">
+    <!-- 3-column background image with text on top -->
+    <div class="col-span-12 md:col-span-6 md:col-span-3">
       <div class="relative w-full h-full rounded-lg overflow-hidden min-h-[300px]">
         {%- if section.settings.uploaded_image != blank -%}
           <div
@@ -33,8 +33,8 @@
         {%- endif -%}
 
         <div class="relative z-10 p-6 h-full flex flex-col justify-center text-white text-center">
-          <h2 class="text-2xl font-bold mb-2">{{ section.settings.heading }}</h2>
-          <p class="text-base">{{ section.settings.description }}</p>
+          <h2 class="text-xl font-bold mb-2">{{ section.settings.heading }}</h2>
+          <p class="text-sm">{{ section.settings.description }}</p>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
 
 {% schema %}
 {
-  "name": "6:6 Grid with Background Text",
+  "name": "6:3 Grid with Background Text",
   "settings": [
     {
       "type": "range",
@@ -129,12 +129,12 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Main Image (Left 6-column)"
+      "label": "Main Image (6-column)"
     },
     {
       "type": "image_picker",
       "id": "uploaded_image",
-      "label": "Background Image (Right 6-column)"
+      "label": "Background Image (3-column)"
     },
     {
       "type": "text",
@@ -146,12 +146,12 @@
       "type": "textarea",
       "id": "description",
       "label": "Overlay Description",
-      "default": "Text shown on top of the background image."
+      "default": "This text appears on top of the background image."
     }
   ],
   "presets": [
     {
-      "name": "6:6 Image & Text Overlay",
+      "name": " Grid with BG   ",
       "category": "Custom Sections"
     }
   ]

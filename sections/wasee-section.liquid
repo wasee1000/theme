@@ -1,0 +1,305 @@
+{% comment %}
+  Precision Injection Pens Section
+  Save this file as: sections/precision-injection-pens.liquid
+{% endcomment %}
+
+{{ 'section-precision-injection-pens.css' | asset_url | stylesheet_tag }}
+
+<div class="precision-injection-pens-section">
+  <div class="container">
+    <div class="content-wrapper">
+      <!-- Left Content Column -->
+      <div class="content-column">
+        <div class="content-box">
+          <h2 class="section-title">{{ section.settings.title }}</h2>
+          
+          <div class="description">
+            {{ section.settings.description }}
+          </div>
+          
+          {% if section.settings.disclaimer_text != blank %}
+            <div class="disclaimer">
+              <h3 class="disclaimer-title">{{ section.settings.disclaimer_title }}</h3>
+              <p class="disclaimer-text">{{ section.settings.disclaimer_text }}</p>
+            </div>
+          {% endif %}
+          
+          {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+            <div class="cta-button">
+              <a href="{{ section.settings.button_url }}" class="btn btn-primary">
+                {{ section.settings.button_text }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      
+      <!-- Right Image Column -->
+      <div class="image-column">
+        <div class="image-wrapper">
+          {% if section.settings.featured_image != blank %}
+            <img 
+              src="{{ section.settings.featured_image | img_url: '800x600' }}" 
+              alt="{{ section.settings.featured_image.alt | escape }}"
+              loading="lazy"
+              class="featured-image"
+            >
+          {% else %}
+            <div class="placeholder-image">
+              <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="600" fill="#e5e5e5"/>
+                <text x="400" y="300" text-anchor="middle" fill="#999" font-size="24">
+                  Upload Product Image
+                </text>
+              </svg>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .precision-injection-pens-section {
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  
+  .content-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .content-box {
+    padding: 40px;
+    background-color: #ffffff;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+    color: {{ section.settings.title_color | default: '#333333' }};
+  }
+  
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: {{ section.settings.text_color | default: '#666666' }};
+  }
+  
+  .disclaimer {
+    margin-bottom: 30px;
+  }
+  
+  .disclaimer-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: {{ section.settings.title_color | default: '#333333' }};
+  }
+  
+  .disclaimer-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    color: {{ section.settings.text_color | default: '#666666' }};
+  }
+  
+  .cta-button {
+    margin-top: auto;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .btn-primary {
+    background-color: {{ section.settings.button_bg_color | default: '#ffffff' }};
+    color: {{ section.settings.button_text_color | default: '#333333' }};
+  }
+  
+  .btn-primary:hover {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  .image-column {
+    position: relative;
+  }
+  
+  .image-wrapper {
+    overflow: hidden;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  }
+  
+  .featured-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .placeholder-image {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .placeholder-image svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .precision-injection-pens-section {
+      padding: 40px 0;
+    }
+    
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .content-box {
+      padding: 30px 20px;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .container {
+      padding: 0 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+    
+    .content-box {
+      padding: 25px 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Precision Injection Pens",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Precision Injection Pens for Confident Daily Use"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover our premium range of high-performance injection pens, thoughtfully designed for accuracy, convenience, and long-term reliability. Built for seamless daily use, these pens offer effortless dose control and a user-friendly experience — helping you manage your routine with precision, ease, and confidence, every single day.</p>"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer_title",
+      "label": "Disclaimer Title",
+      "default": "\"Disclaimer\""
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer_text",
+      "label": "Disclaimer Text",
+      "default": "\"This product is a reusable injection pen system intended for general-purpose applications. We do not supply or market prescription medications, insulin, or regulated medical treatments.\""
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [
+    {
+      "name": "presaentation"
+    }
+  ]
+}
+{% endschema %}
