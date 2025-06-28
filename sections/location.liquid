@@ -1,0 +1,87 @@
+<div class="store-location-section">
+  <div class="store-location-wrapper">
+    {% if section.settings.heading != blank %}
+      <h2 class="store-location-title">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.address != blank %}
+      <div class="store-address">
+        <p>{{ section.settings.address }}</p>
+      </div>
+    {% endif %}
+
+    {% if section.settings.map_embed_url != blank %}
+      <div class="store-map">
+        <iframe 
+          src="{{ section.settings.map_embed_url | strip }}" 
+          width="100%" 
+          height="400" 
+          style="border:0; border-radius: 10px;"
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .store-location-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  .store-location-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .store-address p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+
+  .store-map iframe {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Store Location (Editable)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Title",
+      "default": "Visit Our Store"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Store Address",
+      "default": "Second Gate, Dhaka, Bangladesh"
+    },
+    {
+      "type": "textarea",
+      "id": "map_embed_url",
+      "label": "Google Maps Embed URL (src only)",
+      "default": "https://www.google.com/maps/embed?pb=..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Location (Editable)"
+    }
+  ]
+}
+{% endschema %}
+{% comment %} 
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4812.706945707205!2d90.38112601190524!3d23.735574478591683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c8e1ea9fd1%3A0xa6e274882fdbce53!2sDhaka%20College!5e1!3m2!1sen!2sbd!4v1751065429934!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> {% endcomment %}

@@ -14,5 +14,4 @@ node_modules/
 
 ## Release files
 release
-*.zip
-
+*.zip 

@@ -1,0 +1,85 @@
+{% schema %}
+{
+  "name": "Custom Callout Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Welcome to Our Store"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Explore our latest collections and enjoy exclusive discounts."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Callout Section"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="custom-callout-wrapper">
+  <div class="custom-callout-inner">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.subtext }}</p>
+    {% if section.settings.button_link and section.settings.button_text %}
+      <a href="{{ section.settings.button_link }}" class="custom-callout-button">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .custom-callout-wrapper {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f3f3f3;
+  }
+
+  .custom-callout-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .custom-callout-wrapper h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .custom-callout-wrapper p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: #555;
+  }
+
+  .custom-callout-button {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .custom-callout-button:hover {
+    background-color: #333;
+  }
+</style>
