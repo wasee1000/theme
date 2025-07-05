@@ -1,25 +1,258 @@
-<div class="filter-bar">
-    <div class="filter-group">
-        <button class="filter-btn">
-            <span>⚙️</span> Filter
-        </button>
-        <button class="view-btn">⋯</button>
-        <button class="grid-btn">□</button>
-    </div>
-    <div class="results">
-        Showing 1-16 of 32 results
-    </div>
-    <div class="sort-group">
-        <select>
-            <option>16</option>
-            <option>32</option>
-            <option>64</option>
-        </select>
-        <select>
-            <option>Default</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-        </select>
-    </div>
-</div>
+<div class="filter-wrapper">
+  <!-- Sidebar Filters -->
+  <div class="filter-sidebar">
+    <ul class="filter-list">
  
+      <li class="filter-btn active" data-category="fruits">
+        <img src="fruits-icon.png" alt="Fruits" /> Fruits
+      </li>
+      <li class="filter-btn" data-category="green-vegetable">
+        <img src="green-icon.png" alt="Green Vegetable" /> Green Vegetable
+      </li>
+      <li class="filter-btn" data-category="onion">
+        <img src="onion-icon.png" alt="Onion" /> Onion
+      </li>
+      <li class="filter-btn" data-category="vegetable">
+        <img src="veg-icon.png" alt="Vegetable" /> Vegetable
+      </li>
+      <li class="filter-btn" data-category="lemon">
+        <img src="lemon-icon.png" alt="Lemon" /> Lemon
+      </li>
+    </ul>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="productGrid">
+    {% for collection in collections %}
+      {% assign count = 0 %}
+      {% for product in collection.products %}
+        {% if count < 12 %}
+        <div class="product-card" data-category="{{ collection.handle }}">
+          <div class="product-img-wrapper">
+            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" />
+            <div class="hover-icons">
+              <span>❤️</span>
+              <span>🛒</span>
+              <span>👁️</span>
+            </div>
+            {% if product.available == false %}
+              <span class="badge sold-out">Sold Out</span>
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="badge discount">-{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+            {% endif %}
+          </div>
+          <h4>{{ product.title }}</h4>
+          <p>{{ product.price | money }}</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        {% assign count = count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+/* Layout Container */
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 30px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Sidebar */
+.filter-sidebar {
+  /* width: 200px; */
+}
+
+.filter-list {
+  list-style: none;
+  padding: 0;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fff;
+  margin-bottom: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.filter-btn.active {
+  background: #ffa500;
+  color: white;
+  border-color: #ffa500;
+}
+
+.filter-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Product Grid */
+.product-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Product Card */
+.product-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  width: 267px;
+  height: 342px;
+}
+
+.product-img-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.product-card img {
+  width: 267px;
+  height: 264px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Hover Icons */
+.hover-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.product-card:hover .hover-icons {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-icons span {
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Badges */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: green;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.badge.sold-out {
+  background: #ff4d4d;
+}
+
+.badge.discount {
+  background: #4caf50;
+}
+
+/* Rating Stars */
+.stars {
+  color: #f6a700;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .filter-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-wrapper {
+    flex-direction: column;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+
+--
+
+const buttons = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.product-card');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    const category = button.getAttribute('data-category');
+    let shown = 0;
+
+    cards.forEach(card => {
+      const match = card.getAttribute('data-category');
+      if (category === 'all' || match === category) {
+        if (shown < 9) {
+          card.style.display = "block";
+          shown++;
+        } else {
+          card.style.display = "none";
+        }
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+
+// Hide all product cards after the 12th on initial render
+window.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach((card, idx) => {
+    card.style.display = idx < 12 ? 'block' : 'none';
+  });
+});

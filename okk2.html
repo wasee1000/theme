@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#fdfdfb] font-sans text-black p-10">
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+    <!-- Left Section -->
+    <div class="space-y-7 mt-20">
+      <div>
+        <p class="text-red-600 font-semibold uppercase text-sm">We're all ears</p>
+        <h1 class="text-4xl font-black tracking-tight">Contact Us</h1>
+      </div>
+      <p class="text-gray-700">
+        Have a question or feedback? Use the form below to send us your message. We're always happy to help!
+      </p>
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-yellow-600">✉️</span>
+          <a href="mailto:help@evilgoods.org" class="text-lg font-medium text-black hover:underline">help@evilgoods.org</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-yellow-600">🕒</span>
+          <p class="text-gray-800 font-medium">Monday – Friday: 9:00 AM – 5:00 PM EST</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input type="text" placeholder="Name" class="w-full p-3 rounded-md border border-black bg-[#fefbef] placeholder-gray-500" required>
+        <input type="email" placeholder="Email" class="w-full p-3 rounded-md border border-black bg-[#fefbef] placeholder-gray-500" required>
+      </div>
+      <input type="tel" placeholder="Phone number (Optional)" class="w-full p-3 rounded-md border border-black bg-[#fefbef] placeholder-gray-500">
+      
+      <select class="w-full p-3 rounded-md border border-black bg-[#fefbef] text-gray-700">
+        <option disabled selected>Choose category</option>
+        <option>General Inquiry</option>
+        <option>Custoner Support </option>
+        <option>Feedback</option>
+        <option>Others</option>
+      </select>
+
+      <textarea rows="4" placeholder="Type your message..." class="w-full p-3 rounded-md border border-black bg-[#fefbef] placeholder-gray-500"></textarea>
+
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="policy" class="accent-black">
+        <label for="policy" class="text-sm">I accept the <a href="#" class="underline text-blue-600">Privacy policy</a></label>
+      </div>
+
+      <button type="submit" class="w-full bg-[#fedc2a] hover:bg-yellow-400 text-black font-bold py-3 rounded-md shadow-md border border-black">
+        Send
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

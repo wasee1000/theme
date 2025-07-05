@@ -1,0 +1,240 @@
+<style>
+  .contact-section {
+    background-color: #fdfdfb;
+    font-family: sans-serif;
+    color: black;
+    padding: 40px 20px;
+  }
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .apple {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+  }
+  .banana {
+    margin-top: 12px;
+    accent-color: red;
+  }
+  @media (min-width: 768px) {
+    .contact-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .contact-left {
+    margin-top: 60px;
+  }
+  .contact-left h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .contact-left p,
+  .contact-info p,
+  .contact-info a {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .contact-info {
+    margin-top: 30px;
+  }
+  .contact-info div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid black;
+    background-color: #fefbef;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+  }
+  .contact-form textarea {
+    resize: vertical;
+  }
+  .contact-form label {
+    font-size: 0.875rem;
+  }
+  .contact-form .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .contact-form button {
+    width: 100%;
+    font-weight: bold;
+    padding: 14px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .contact-form button:hover {
+    filter: brightness(0.9);
+  }
+  .orange {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .mango {
+    text-decoration: underline;
+    color: #2563eb;
+  }
+</style>
+
+<div class="contact-section">
+  <div class="contact-container">
+    <!-- Left Section -->
+    <div class="contact-left">
+      <p style="color:#dc2626; font-weight:600; text-transform:uppercase; font-size:0.875rem;">
+        {{ section.settings.heading_subtitle }}
+      </p>
+      <h1>{{ section.settings.heading_title }}</h1>
+      <p>{{ section.settings.heading_text }}</p>
+      <div class="contact-info">
+        <div>
+          <a href="mailto:{{ section.settings.email_address }}">{{ section.settings.email_address }}</a>
+        </div>
+        <div>
+          <p>{{ section.settings.hours_text }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section - Shopify Contact Form -->
+    <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form">
+      <input type="hidden" name="form_type" value="contact" />
+      <input type="hidden" name="utf8" value="✓" />
+
+      <!-- Name + Email -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <input type="text" name="contact[name]" placeholder="Name" required />
+        <input type="email" name="contact[email]" placeholder="Email" required />
+      </div>
+
+      <input type="tel" name="contact[phone]" placeholder="Phone number (Optional)" />
+
+      <select name="contact[category]" required>
+        <option disabled selected>Choose category</option>
+        <option>General Inquiry</option>
+        <option>Customer Support</option>
+        <option>Feedback</option>
+        <option>Others</option>
+      </select>
+
+      <textarea name="contact[body]" rows="4" placeholder="Type your message..." required></textarea>
+
+      <div class="apple">
+        <input style="width: 20px;" type="checkbox" id="policy" class="banana" required />
+        <label for="policy" class="orange">
+          {{ section.settings.checkbox_text_part1 }}
+          <a href="{{ section.settings.checkbox_policy_link }}" class="mango" target="_blank" rel="noopener noreferrer">
+            {{ section.settings.checkbox_text_policy }}
+          </a>
+        </label>
+      </div>
+
+      <button type="submit" style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+        {{ section.settings.button_text }}
+      </button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "tag": "section",
+  "class": "contact-form-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_subtitle",
+      "label": "Subtitle (Above Heading)",
+      "default": "We're all ears"
+    },
+    {
+      "type": "text",
+      "id": "heading_title",
+      "label": "Main Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_text",
+      "label": "Intro Text",
+      "default": "Have a question or feedback? Use the form below to send us your message. We're always happy to help!"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Contact Email",
+      "default": "help@evilgoods.org"
+    },
+    {
+      "type": "text",
+      "id": "hours_text",
+      "label": "Opening Hours Text",
+      "default": "Monday – Friday: 9:00 AM – 5:00 PM EST"
+    },
+    {
+      "type": "text",
+      "id": "checkbox_text_part1",
+      "label": "Checkbox Text Before Link",
+      "default": "I accept the"
+    },
+    {
+      "type": "text",
+      "id": "checkbox_policy_link",
+      "label": "Privacy Policy Link URL",
+      "default": "https://example.com/privacy-policy"
+    },
+    {
+      "type": "text",
+      "id": "checkbox_text_policy",
+      "label": "Privacy Policy Link Text",
+      "default": "Privacy policy"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Submit Button Text",
+      "default": "Send"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Submit Button Background Color",
+      "default": "#fedc2a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Submit Button Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form",
+      "category": "Contact"
+    }
+  ]
+}
+{% endschema %}
